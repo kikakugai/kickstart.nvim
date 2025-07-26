@@ -1068,3 +1068,51 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+-- NOTE: Personal Settings
+local opts = { noremap = true, silent = true }
+
+vim.api.nvim_create_autocmd('InsertLeave', {
+  callback = function()
+    vim.fn.system 'com.google.inputmethod.Japanese.base'
+  end,
+})
+
+vim.o.encoding = 'utf-8'
+
+-- Insert Mode Mappings
+vim.keymap.set('i', 'jj', '<Esc>', opts)
+vim.keymap.set('i', 'jk', '<Esc>:w<cr>', opts)
+
+-- Normal Mode Mappings
+vim.keymap.set('n', '<C-h>', '^', opts)
+vim.keymap.set('n', '<C-l>', '$', opts)
+vim.keymap.set('n', '<C-k>', 'gg', opts)
+vim.keymap.set('n', '<C-j>', 'G', opts)
+vim.keymap.set('n', '<leader>e', ':Neotree toggle right<CR>', opts)
+vim.keymap.set('n', '<leader>ls', ':ls<CR>', opts)
+vim.keymap.set('n', '<leader>v', ':vsplit<CR>', opts) -- 垂直分割
+vim.keymap.set('n', '<leader>s', ':split<CR>', opts) -- 水平分割
+vim.keymap.set('n', '<leader>w', ':close<CR>', opts) -- ウィドウを閉じる
+vim.keymap.set('n', '<leader>h', '<C-w>h', opts) -- 左のウィンドウ
+vim.keymap.set('n', '<leader>l', '<C-w>l', opts) -- 右のウィンドウ
+vim.keymap.set('n', '<leader>j', '<C-w>j', opts) -- 下のウィンドウ
+vim.keymap.set('n', '<leader>k', '<C-w>k', opts) -- 上のウィンドウ
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
+vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
+vim.keymap.set('n', '<leader>x', ':bd<CR>', opts)
+vim.keymap.set('n', '<C-a>', 'ggVG', opts)
+vim.keymap.set('n', '<leader>qq', ':q<CR>', opts) -- 終了
+
+-- Normal Mode Mappings
+vim.keymap.set('v', '<C-h>', '^', opts)
+vim.keymap.set('v', '<C-l>', '$', opts)
+vim.keymap.set('v', '<C-k>', 'gg', opts)
+vim.keymap.set('v', '<C-j>', 'G', opts)
+vim.keymap.set('v', '<Tab>', '>gv', opts)
+vim.keymap.set('v', '<S-Tab>', '<gv', opts)
+vim.keymap.set('v', '<', '<gv', opts)
+vim.keymap.set('v', '>', '>gv', opts)
+
+-- Open Neovim Config File
+vim.cmd 'nmap <leader>c :e ~/.config/nvim/init.lua<cr>'
